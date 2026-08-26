@@ -19,7 +19,7 @@ step and no required dependencies.
 
 > Narayanaswami, S. and Sharma, V. (2026). *AirResilience: configurable
 > simulation of disruption propagation in scheduled operations*, version 1.0.0.
-> Zenodo. https://doi.org/10.5281/zenodo.22105547
+> Zenodo. https://doi.org/10.5281/zenodo.22105690
 
 If you use the software in published work, please cite the accompanying
 SoftwareX article as well as this release.
