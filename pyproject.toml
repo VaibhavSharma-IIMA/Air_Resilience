@@ -37,10 +37,10 @@ classifiers = [
 dependencies = ["PyYAML>=6.0"]
 
 [project.urls]
-Homepage = "https://github.com/VaibhavSharma-IIMA/AirResilience"
-Repository = "https://github.com/VaibhavSharma-IIMA/AirResilience"
-Issues = "https://github.com/VaibhavSharma-IIMA/AirResilience/issues"
-Documentation = "https://github.com/VaibhavSharma-IIMA/AirResilience#readme"
+Homepage = "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
+Repository = "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
+Issues = "https://github.com/VaibhavSharma-IIMA/Air_Resilience/issues"
+Documentation = "https://github.com/VaibhavSharma-IIMA/Air_Resilience#readme"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]

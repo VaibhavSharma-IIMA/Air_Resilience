@@ -11,8 +11,8 @@ type: software
 version: "1.0.0"
 date-released: "2026-08-14"
 license: MIT
-repository-code: "https://github.com/VaibhavSharma-IIMA/AirResilience"
-url: "https://github.com/VaibhavSharma-IIMA/AirResilience"
+repository-code: "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
+url: "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
 contact:
   - email: "sundaravallin@iima.ac.in"
     family-names: Narayanaswami

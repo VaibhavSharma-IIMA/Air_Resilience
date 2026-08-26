@@ -1,7 +1,7 @@
 # AirResilience
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22105547.svg)](https://doi.org/10.5281/zenodo.22105547)
-[![tests](https://github.com/VaibhavSharma-IIMA/AirResilience/actions/workflows/tests.yml/badge.svg)](https://github.com/VaibhavSharma-IIMA/AirResilience/actions/workflows/tests.yml)
+[![tests](https://github.com/VaibhavSharma-IIMA/Air_Resilience/actions/workflows/tests.yml/badge.svg)](https://github.com/VaibhavSharma-IIMA/Air_Resilience/actions/workflows/tests.yml)
 
 A configurable simulator for disruption propagation in **airline operations**,
 with a standard trace format and a browser viewer that needs no installation.

@@ -24,10 +24,10 @@
     "Microsoft Windows"
   ],
   "license": "https://spdx.org/licenses/MIT",
-  "codeRepository": "https://github.com/VaibhavSharma-IIMA/AirResilience",
-  "issueTracker": "https://github.com/VaibhavSharma-IIMA/AirResilience/issues",
-  "readme": "https://github.com/VaibhavSharma-IIMA/AirResilience#readme",
-  "contIntegration": "https://github.com/VaibhavSharma-IIMA/AirResilience/actions",
+  "codeRepository": "https://github.com/VaibhavSharma-IIMA/Air_Resilience",
+  "issueTracker": "https://github.com/VaibhavSharma-IIMA/Air_Resilience/issues",
+  "readme": "https://github.com/VaibhavSharma-IIMA/Air_Resilience#readme",
+  "contIntegration": "https://github.com/VaibhavSharma-IIMA/Air_Resilience/actions",
   "developmentStatus": "active",
   "applicationCategory": "Simulation",
   "keywords": [
