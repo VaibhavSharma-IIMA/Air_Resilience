@@ -1,0 +1,71 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "AirResilience",
+  "description": "Configuration-driven discrete-event simulation of disruption propagation in timetabled operations, with declarative duty-time rules, a portable trace format carrying parameter provenance, and a browser viewer. Validated against US DOT BTS On-Time Performance data.",
+  "version": "1.0.0",
+  "identifier": "https://doi.org/10.5281/zenodo.22105547",
+  "dateCreated": "2026-01-05",
+  "datePublished": "2026-08-14",
+  "programmingLanguage": [
+    {
+      "@type": "ComputerLanguage",
+      "name": "Python"
+    },
+    {
+      "@type": "ComputerLanguage",
+      "name": "JavaScript"
+    }
+  ],
+  "runtimePlatform": "Python 3.10+",
+  "operatingSystem": [
+    "Linux",
+    "macOS",
+    "Microsoft Windows"
+  ],
+  "license": "https://spdx.org/licenses/MIT",
+  "codeRepository": "https://github.com/VaibhavSharma-IIMA/AirResilience",
+  "issueTracker": "https://github.com/VaibhavSharma-IIMA/AirResilience/issues",
+  "readme": "https://github.com/VaibhavSharma-IIMA/AirResilience#readme",
+  "contIntegration": "https://github.com/VaibhavSharma-IIMA/AirResilience/actions",
+  "developmentStatus": "active",
+  "applicationCategory": "Simulation",
+  "keywords": [
+    "discrete-event simulation",
+    "resilience",
+    "disruption propagation",
+    "crew scheduling",
+    "duty-time regulation",
+    "operations research",
+    "airline operations"
+  ],
+  "softwareRequirements": "Python 3.10 or later and PyYAML, which is installed automatically. The engine, trace format and viewer otherwise use only the standard library.",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Sundaravalli",
+      "familyName": "Narayanaswami",
+      "email": "sundaravallin@iima.ac.in",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Indian Institute of Management Ahmedabad"
+      }
+    },
+    {
+      "@type": "Person",
+      "givenName": "Vaibhav",
+      "familyName": "Sharma",
+      "email": "p25vaibhav@iima.ac.in",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Indian Institute of Management Ahmedabad"
+      }
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Sundaravalli",
+    "familyName": "Narayanaswami",
+    "email": "sundaravallin@iima.ac.in"
+  }
+}

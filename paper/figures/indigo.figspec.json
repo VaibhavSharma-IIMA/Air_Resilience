@@ -1,0 +1,307 @@
+{
+  "_comment": "What the figures for the hub case of Section 3.1 are made from. Causes, baselines and published targets are properties of the study rather than of the software, so they are declared here instead of being written into make_figures.py. Copy this file and change the config, causes and targets to produce the same figures for another experiment.",
+  "config": "configs/indigo_bom.yaml",
+  "seeds": [
+    101,
+    121
+  ],
+  "metric": "cancel_pct",
+  "ylabel": "Cancellations",
+  "sim_kw": {
+    "congestion_minutes": 40.0
+  },
+  "baseline": [
+    {
+      "path": "regulation.max_duty_minutes",
+      "value": 780
+    },
+    {
+      "path": "regulation.weekly_rest_days",
+      "value": 1
+    },
+    {
+      "path": "conditions",
+      "value": {}
+    },
+    {
+      "path": "policy.roster_mode",
+      "value": "compliant"
+    },
+    {
+      "path": "policy.standby_pct",
+      "value": 3
+    }
+  ],
+  "causes": {
+    "rule change": [
+      {
+        "path": "regulation.max_duty_minutes",
+        "value": 678
+      },
+      {
+        "path": "regulation.weekly_rest_days",
+        "value": 2
+      }
+    ],
+    "winter fog": [
+      {
+        "path": "conditions",
+        "value": {
+          "0": [
+            "fog"
+          ],
+          "1": [
+            "fog"
+          ],
+          "2": [
+            "fog"
+          ]
+        }
+      }
+    ],
+    "roster not replanned": [
+      {
+        "path": "policy.roster_mode",
+        "value": "legacy"
+      }
+    ],
+    "standby withdrawn": [
+      {
+        "path": "policy.standby_pct",
+        "value": 0
+      }
+    ]
+  },
+  "waterfall_order": [
+    "rule change",
+    "winter fog",
+    "roster not replanned",
+    "standby withdrawn"
+  ],
+  "colours": {
+    "rule change": "#D69A2E",
+    "winter fog": "#6B8A99",
+    "roster not replanned": "#C0392B",
+    "standby withdrawn": "#C0392B"
+  },
+  "coalitions_shown": [
+    {
+      "label": "nothing",
+      "causes": [],
+      "colour": "#C7D0D5"
+    },
+    {
+      "label": "rules only",
+      "causes": [
+        "rule change"
+      ],
+      "colour": "#D69A2E"
+    },
+    {
+      "label": "rules + weather",
+      "causes": [
+        "rule change",
+        "winter fog"
+      ],
+      "colour": "#D69A2E"
+    },
+    {
+      "label": "+ roster not\nreplanned",
+      "causes": [
+        "rule change",
+        "winter fog",
+        "roster not replanned"
+      ],
+      "colour": "#C0392B"
+    },
+    {
+      "label": "all four",
+      "causes": [
+        "rule change",
+        "winter fog",
+        "roster not replanned",
+        "standby withdrawn"
+      ],
+      "colour": "#1F3A4D"
+    }
+  ],
+  "published_daily": [
+    49.5,
+    35.0,
+    19.7
+  ],
+  "daily_metric": "otp_pct",
+  "daily_xlabel": "Day of the week beginning 2 December",
+  "standby_levels": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    15,
+    20
+  ],
+  "day_labels": [
+    "2 Dec",
+    "3 Dec",
+    "4 Dec",
+    "5 Dec",
+    "6 Dec",
+    "7 Dec",
+    "8 Dec"
+  ],
+  "viewer_day": "2 Dec",
+  "viewer_scrub": 0.78,
+  "topology_day": 2,
+  "topology_scrub": 0.95,
+  "topology_configs": [
+    {
+      "config": "configs/example_p2p.yaml",
+      "label": "no standby cover",
+      "standby": 0
+    },
+    {
+      "config": "configs/example_p2p.yaml",
+      "label": "15% standby",
+      "standby": 15
+    }
+  ],
+  "published_daily_note": "Daily on-time performance for the first three days. These are the fitted targets in the calibration spec.",
+  "held_out_target": {
+    "day": 4,
+    "metric": "cancel_pct",
+    "value": 27.6,
+    "note": "never optimised against"
+  },
+  "calibration": {
+    "start_from": [
+      {
+        "path": "regulation.max_duty_minutes",
+        "value": 780
+      }
+    ],
+    "parameters": [
+      {
+        "path": "regulation.max_duty_minutes",
+        "low": 640,
+        "high": 720,
+        "step": 6,
+        "note": "equivalent to the FDTL cut"
+      },
+      {
+        "path": "congestion_minutes",
+        "low": 20,
+        "high": 60,
+        "step": 10
+      }
+    ],
+    "targets": [
+      {
+        "metric": "cancel_pct",
+        "value": 28.5,
+        "tolerance": 2.0,
+        "note": "hub airport, week of 1-8 December"
+      },
+      {
+        "metric": "otp_pct.0",
+        "value": 49.5,
+        "tolerance": 8.0,
+        "note": "published daily OTP"
+      },
+      {
+        "metric": "otp_pct.1",
+        "value": 35.0,
+        "tolerance": 8.0,
+        "note": "published daily OTP"
+      },
+      {
+        "metric": "otp_pct.2",
+        "value": 19.7,
+        "tolerance": 8.0,
+        "note": "published daily OTP"
+      },
+      {
+        "metric": "cancel_pct.3",
+        "value": 27.6,
+        "tolerance": 5.0,
+        "fitted": false,
+        "note": "never optimised against; scores the fit"
+      }
+    ],
+    "seeds": [
+      101,
+      107
+    ],
+    "max_evaluations": 120
+  },
+  "sweep": {
+    "parameters": [
+      {
+        "path": "regulation.max_duty_minutes",
+        "low": 600,
+        "high": 740,
+        "step": 10
+      }
+    ],
+    "targets": [
+      {
+        "metric": "cancel_pct",
+        "value": 28.5,
+        "tolerance": 2.0
+      }
+    ],
+    "seeds": [
+      101,
+      105
+    ],
+    "max_evaluations": 40,
+    "variants": {
+      "3 legs per duty": [
+        {
+          "path": "max_legs_per_duty",
+          "value": 3,
+          "both_rule_sets": true
+        }
+      ],
+      "5 legs per duty": [
+        {
+          "path": "max_legs_per_duty",
+          "value": 5,
+          "both_rule_sets": true
+        }
+      ],
+      "roster 1h inside cap": [
+        {
+          "path": "roster_headroom_minutes",
+          "value": 60,
+          "both_rule_sets": true
+        }
+      ],
+      "roster 3h inside cap": [
+        {
+          "path": "roster_headroom_minutes",
+          "value": 180,
+          "both_rule_sets": true
+        }
+      ],
+      "repositioning 2/night": [
+        {
+          "path": "policy.repositioning_per_night",
+          "value": 2
+        }
+      ],
+      "repositioning 12/night": [
+        {
+          "path": "policy.repositioning_per_night",
+          "value": 12
+        }
+      ]
+    },
+    "report_metrics": [
+      "cancel_pct",
+      "cascade_multiplier",
+      "duties_per_day"
+    ]
+  },
+  "_targets_note": "Calibration targets are observations of the modelled week. They are inputs to this study, not properties of the software; cite them in any write-up that reports a fitted parameter."
+}

@@ -1,0 +1,108 @@
+# The IndiGo December 2025 case, expressed entirely as configuration.
+#
+# Nothing in this file is special to the engine: it is one experiment among many
+# the framework can run. Every parameter carries a provenance label so a reader
+# can tell evidence from modelling choice.
+
+name: indigo-bom-december-2025
+description: >
+  Stylised Mumbai hub operation across the week of 2-8 December 2025, used as the
+  framework's demonstration case. The timetable is synthetic and the duty rules
+  are a reconstruction; see parameters below.
+
+days: 7
+seed: 104
+
+network:
+  hub: BOM
+  airports:
+    - {code: BOM, name: Mumbai,     lat: 19.0896, lon: 72.8656}
+    - {code: AMD, name: Ahmedabad,  lat: 23.0772, lon: 72.6347}
+    - {code: JAI, name: Jaipur,     lat: 26.8242, lon: 75.8122}
+    - {code: DEL, name: Delhi,      lat: 28.5562, lon: 77.1000}
+    - {code: CCU, name: Kolkata,    lat: 22.6547, lon: 88.4467}
+    - {code: HYD, name: Hyderabad,  lat: 17.2403, lon: 78.4294}
+    - {code: MAA, name: Chennai,    lat: 12.9941, lon: 80.1709}
+    - {code: BLR, name: Bengaluru,  lat: 13.1979, lon: 77.7063}
+    - {code: GOI, name: Goa,        lat: 15.3808, lon: 73.8314}
+  routes:
+    - {origin: BOM, destination: AMD, block_minutes: 70,  weight: 3}
+    - {origin: BOM, destination: JAI, block_minutes: 100, weight: 1}
+    - {origin: BOM, destination: DEL, block_minutes: 125, weight: 2}
+    - {origin: BOM, destination: CCU, block_minutes: 160, weight: 1}
+    - {origin: BOM, destination: HYD, block_minutes: 85,  weight: 3}
+    - {origin: BOM, destination: MAA, block_minutes: 105, weight: 2}
+    - {origin: BOM, destination: BLR, block_minutes: 100, weight: 3}
+    - {origin: BOM, destination: GOI, block_minutes: 60,  weight: 2}
+
+fleet:
+  count: 40
+  type: narrowbody
+  base: BOM
+  turn_minutes:   {hub: 40, outstation: 35}
+  slack_minutes:  {hub: 16, outstation: 12}
+  overnight_ground_minutes: 300
+  repositioning_per_night: 6
+
+crew:
+  units_per_aircraft: 2.925
+  unit_size: 2
+  base: BOM
+  callout_minutes: 75
+
+schedule:
+  source: generate
+  rotations_early: 4
+  rotations_late: 3
+  early_cutoff: 390
+  day_start: 300
+  stagger_minutes: 150
+  stagger_jitter: 20
+
+# Rules the roster was planned under, before the revision.
+baseline_regulation: dgca_style_2025_pre
+
+# Rules actually in force during the week.
+regulation:
+  name: dgca-style-2025-post-calibrated
+  description: Post-revision limits with the fitted 1.7 h reduction applied
+  authority: reconstruction, not transcribed from the circular
+  is_reconstruction: true
+  max_duty_minutes: 678          # 780 minus the fitted 1.7 h
+  max_legs_per_duty: 4
+  min_rest_minutes: 720
+  report_before_minutes: 60
+  debrief_after_minutes: 30
+  rolling:
+    - {days: 7, max_duty_minutes: 3600}
+  night:
+    window: [0, 360]
+    duty_penalty_minutes: 60
+  weekly_rest_days: 2
+  roster_headroom_minutes: 120
+
+policy:
+  roster_mode: legacy            # flying the roster built under the old cap
+  standby_pct: 0
+  repositioning_per_night: 6
+  notes: The week as flown.
+
+conditions:
+  0: [fog]
+  1: [fog]
+  2: [fog]
+
+# Calendar labels for the modelled week, used by the viewer and the day table.
+day_labels: ["2 Dec", "3 Dec", "4 Dec", "5 Dec", "6 Dec", "7 Dec", "8 Dec"]
+
+parameters:
+  - {name: fdtl_cut, value: 1.7, unit: hours, provenance: calibrated,
+     note: Fitted jointly with congestion feedback to four published outcomes}
+  - {name: congestion_feedback, value: 40, unit: minutes, provenance: calibrated,
+     note: Functional form assumed, magnitude fitted}
+  - {name: crews_per_aircraft, value: 2.925, unit: crews/aircraft, provenance: derived,
+     note: Set so the pre-change week runs clean; only the 7.6:9.1 ratio is sourced}
+  - {name: weekly_departures_network, value: 15014, unit: flights, provenance: sourced,
+     note: DGCA notice}
+  - {name: pilot_establishment_network, value: 5200, unit: pilots, provenance: sourced,
+     note: Lok Sabha}

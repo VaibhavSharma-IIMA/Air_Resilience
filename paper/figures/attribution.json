@@ -1,0 +1,177 @@
+{
+ "config": "configs/indigo_bom.yaml",
+ "seeds": [
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120
+ ],
+ "causes": [
+  "rule change",
+  "winter fog",
+  "roster not replanned",
+  "standby withdrawn"
+ ],
+ "baseline": 1.1672771981646506,
+ "total": 25.887725802886983,
+ "values": {
+  "rule change": 13.541791959663552,
+  "winter fog": 0.9126216106742884,
+  "roster not replanned": 7.990534462742713,
+  "standby withdrawn": 2.2755005716417807
+ },
+ "shares": {
+  "rule change": 54.77971769928427,
+  "winter fog": 3.691767998498016,
+  "roster not replanned": 32.323581948331984,
+  "standby withdrawn": 9.204932353885734
+ },
+ "coalitions": {
+  "0000": 1.1672771981646506,
+  "0001": 2.0120022534937556,
+  "0010": 1.1672771981646506,
+  "0011": 2.0120022534937556,
+  "0100": 1.3160665108683003,
+  "0101": 2.204439780149357,
+  "0110": 1.3160665108683003,
+  "0111": 2.204439780149357,
+  "1000": 6.918278367821371,
+  "1001": 7.350631406209556,
+  "1010": 18.59822240169751,
+  "1011": 23.27556521171937,
+  "1100": 7.0771119568531695,
+  "1101": 7.557373801904818,
+  "1110": 20.36759166743327,
+  "1111": 25.887725802886983
+ },
+ "coalition_table": [
+  {
+   "rule change": false,
+   "winter fog": false,
+   "roster not replanned": false,
+   "standby withdrawn": false,
+   "outcome": 1.167
+  },
+  {
+   "rule change": false,
+   "winter fog": false,
+   "roster not replanned": true,
+   "standby withdrawn": false,
+   "outcome": 1.167
+  },
+  {
+   "rule change": false,
+   "winter fog": true,
+   "roster not replanned": false,
+   "standby withdrawn": false,
+   "outcome": 1.316
+  },
+  {
+   "rule change": false,
+   "winter fog": true,
+   "roster not replanned": true,
+   "standby withdrawn": false,
+   "outcome": 1.316
+  },
+  {
+   "rule change": false,
+   "winter fog": false,
+   "roster not replanned": false,
+   "standby withdrawn": true,
+   "outcome": 2.012
+  },
+  {
+   "rule change": false,
+   "winter fog": false,
+   "roster not replanned": true,
+   "standby withdrawn": true,
+   "outcome": 2.012
+  },
+  {
+   "rule change": false,
+   "winter fog": true,
+   "roster not replanned": false,
+   "standby withdrawn": true,
+   "outcome": 2.204
+  },
+  {
+   "rule change": false,
+   "winter fog": true,
+   "roster not replanned": true,
+   "standby withdrawn": true,
+   "outcome": 2.204
+  },
+  {
+   "rule change": true,
+   "winter fog": false,
+   "roster not replanned": false,
+   "standby withdrawn": false,
+   "outcome": 6.918
+  },
+  {
+   "rule change": true,
+   "winter fog": true,
+   "roster not replanned": false,
+   "standby withdrawn": false,
+   "outcome": 7.077
+  },
+  {
+   "rule change": true,
+   "winter fog": false,
+   "roster not replanned": false,
+   "standby withdrawn": true,
+   "outcome": 7.351
+  },
+  {
+   "rule change": true,
+   "winter fog": true,
+   "roster not replanned": false,
+   "standby withdrawn": true,
+   "outcome": 7.557
+  },
+  {
+   "rule change": true,
+   "winter fog": false,
+   "roster not replanned": true,
+   "standby withdrawn": false,
+   "outcome": 18.598
+  },
+  {
+   "rule change": true,
+   "winter fog": true,
+   "roster not replanned": true,
+   "standby withdrawn": false,
+   "outcome": 20.368
+  },
+  {
+   "rule change": true,
+   "winter fog": false,
+   "roster not replanned": true,
+   "standby withdrawn": true,
+   "outcome": 23.276
+  },
+  {
+   "rule change": true,
+   "winter fog": true,
+   "roster not replanned": true,
+   "standby withdrawn": true,
+   "outcome": 25.888
+  }
+ ]
+}

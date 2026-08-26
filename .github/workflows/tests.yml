@@ -1,0 +1,50 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  suites:
+    name: Python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.10", "3.11", "3.12", "3.13"]
+        include:
+          # C7 claims Linux, macOS and Windows. Check that on one version
+          # rather than the full matrix, which would be slow for no new signal.
+          - os: macos-latest
+            python: "3.12"
+          - os: windows-latest
+            python: "3.12"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install
+        # No dependencies by design. Installing with no extras is itself a test
+        # that the claim in C7 holds.
+        run: pip install -e .
+
+      - name: Parity suite
+        run: python tests/test_parity.py
+
+      - name: Unit suite
+        run: python tests/test_units.py
+
+      - name: Console entry point
+        run: airresilience configs/indigo_bom.yaml
+
+      - name: YAML extra
+        run: |
+          pip install -e ".[yaml]"
+          python tests/test_units.py

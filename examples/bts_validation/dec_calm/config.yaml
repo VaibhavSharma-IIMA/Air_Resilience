@@ -1,0 +1,165 @@
+# dec22-calm
+#
+# Generated from US DOT BTS On-Time Performance data by adapters/bts_ingest.py.
+# Aircraft rotations are reconstructed from real tail numbers; the schedule
+# is what the carrier published, including flights that were cancelled.
+#
+# Crew constraints are DISABLED. No public dataset records crew assignment,
+# so crew legality cannot be validated against observation. With an
+# unconstrained rule set every duty is always legal, and the only
+# cancellation the model can produce is resource_out_of_position.
+# To re-enable crew, replace the regulation block with a real rule set.
+
+name: dec22-calm
+description: BTS-derived rotations, 2022-12-01 to 2022-12-07
+days: 7
+seed: 1
+
+network:
+  hub: MDW
+  airports:
+    - {code: ABQ}
+    - {code: ALB}
+    - {code: AMA}
+    - {code: ATL}
+    - {code: AUS}
+    - {code: BDL}
+    - {code: BHM}
+    - {code: BLI}
+    - {code: BNA}
+    - {code: BOI}
+    - {code: BOS}
+    - {code: BUF}
+    - {code: BUR}
+    - {code: BWI}
+    - {code: BZN}
+    - {code: CHS}
+    - {code: CLE}
+    - {code: CLT}
+    - {code: CMH}
+    - {code: COS}
+    - {code: CRP}
+    - {code: CVG}
+    - {code: DAL}
+    - {code: DCA}
+    - {code: DEN}
+    - {code: DSM}
+    - {code: DTW}
+    - {code: ECP}
+    - {code: ELP}
+    - {code: EUG}
+    - {code: FAT}
+    - {code: FLL}
+    - {code: GEG}
+    - {code: GRR}
+    - {code: GSP}
+    - {code: HDN}
+    - {code: HNL}
+    - {code: HOU}
+    - {code: HRL}
+    - {code: IAD}
+    - {code: IAH}
+    - {code: ICT}
+    - {code: IND}
+    - {code: ISP}
+    - {code: ITO}
+    - {code: JAN}
+    - {code: JAX}
+    - {code: KOA}
+    - {code: LAS}
+    - {code: LAX}
+    - {code: LBB}
+    - {code: LGA}
+    - {code: LGB}
+    - {code: LIH}
+    - {code: LIT}
+    - {code: MAF}
+    - {code: MCI}
+    - {code: MCO}
+    - {code: MDW}
+    - {code: MEM}
+    - {code: MHT}
+    - {code: MIA}
+    - {code: MKE}
+    - {code: MSP}
+    - {code: MSY}
+    - {code: MTJ}
+    - {code: MYR}
+    - {code: OAK}
+    - {code: OGG}
+    - {code: OKC}
+    - {code: OMA}
+    - {code: ONT}
+    - {code: ORD}
+    - {code: ORF}
+    - {code: PBI}
+    - {code: PDX}
+    - {code: PHL}
+    - {code: PHX}
+    - {code: PIT}
+    - {code: PNS}
+    - {code: PSP}
+    - {code: PVD}
+    - {code: PWM}
+    - {code: RDU}
+    - {code: RIC}
+    - {code: RNO}
+    - {code: ROC}
+    - {code: RSW}
+    - {code: SAN}
+    - {code: SAT}
+    - {code: SAV}
+    - {code: SBA}
+    - {code: SDF}
+    - {code: SEA}
+    - {code: SFO}
+    - {code: SJC}
+    - {code: SJU}
+    - {code: SLC}
+    - {code: SMF}
+    - {code: SNA}
+    - {code: SRQ}
+    - {code: STL}
+    - {code: SYR}
+    - {code: TPA}
+    - {code: TUL}
+    - {code: TUS}
+    - {code: VPS}
+
+fleet:
+  count: 727
+  base: MDW
+  turn_minutes:  {hub: 40, outstation: 35}   # calibrated, see validate_bts.py
+  slack_minutes: {hub: 0, outstation: 0}
+  overnight_ground_minutes: 300
+  repositioning_per_night: 0                 # BTS shows no ferry positioning
+
+crew:
+  units: 2908                   # generous; crew must never bind
+  unit_size: 2
+  callout_minutes: 0
+
+schedule:
+  source: file
+  path: schedule.csv
+  records_actual: true          # historical data, so gaps are recovery not failure
+
+# Deliberately empty of limits: an unset rule is not enforced.
+regulation:
+  name: unconstrained
+  description: Crew constraints disabled; aircraft rotations only
+  authority: not applicable
+  report_before_minutes: 0
+  debrief_after_minutes: 0
+  roster_headroom_minutes: 0
+
+policy:
+  roster_mode: compliant
+  standby_pct: 0
+  repositioning_per_night: 0
+
+parameters:
+  - {name: rotations, value: BTS reconstruction, provenance: sourced,
+     note: US DOT Bureau of Transportation Statistics, On-Time Performance}
+  - {name: crew_constraints, value: disabled, provenance: assumed,
+     note: No public data records crew assignment; not validated}

@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airresilience"
+version = "1.0.0"
+description = "Configurable simulation of disruption propagation in scheduled operations"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["simulation", "discrete-event", "airline", "resilience",
+            "disruption", "operations-research", "crew-scheduling"]
+authors = [
+  {name = "Sundaravalli Narayanaswami", email = "sundaravallin@iima.ac.in"},
+  {name = "Vaibhav Sharma", email = "p25vaibhav@iima.ac.in"},
+]
+maintainers = [
+  {name = "Sundaravalli Narayanaswami", email = "sundaravallin@iima.ac.in"},
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+]
+
+# PyYAML is required because the shipped configurations are YAML. Nothing else
+# is: the engine, the trace format and the viewer use only the standard library,
+# so installing this resolves a single well-known package and no tree beneath it.
+dependencies = ["PyYAML>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/VaibhavSharma-IIMA/AirResilience"
+Repository = "https://github.com/VaibhavSharma-IIMA/AirResilience"
+Issues = "https://github.com/VaibhavSharma-IIMA/AirResilience/issues"
+Documentation = "https://github.com/VaibhavSharma-IIMA/AirResilience#readme"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+airresilience = "airresilience.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["airresilience*"]
+
+[tool.setuptools.package-data]
+airresilience = ["py.typed"]

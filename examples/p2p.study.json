@@ -1,0 +1,58 @@
+{
+  "_comment": "A study of the point-to-point configuration, written to show that the analysis layer is not tied to any one case. Nothing here refers to the hub study: different network, different causes, different levers. Run it with:  python examples/analysis_demo.py --spec examples/p2p.study.json",
+
+  "config": "configs/example_p2p.yaml",
+  "seeds": [11, 31],
+  "metric": "cancel_pct",
+  "ylabel": "Cancellations",
+  "sim_kw": {},
+
+  "baseline": [
+    {"path": "policy.standby_pct", "value": 15},
+    {"path": "policy.repositioning_per_night", "value": 6},
+    {"path": "regulation.max_duty_minutes", "value": 780},
+    {"path": "conditions", "value": {}}
+  ],
+
+  "causes": {
+    "tighter duty cap": [
+      {"path": "regulation.max_duty_minutes", "value": 660}
+    ],
+    "standby withdrawn": [
+      {"path": "policy.standby_pct", "value": 0}
+    ],
+    "no overnight repositioning": [
+      {"path": "policy.repositioning_per_night", "value": 0}
+    ],
+    "winter weather": [
+      {"path": "conditions", "value": {"1": ["fog"], "2": ["fog"]}}
+    ]
+  },
+
+  "waterfall_order": ["tighter duty cap", "winter weather",
+                      "standby withdrawn", "no overnight repositioning"],
+
+  "coalitions_shown": [
+    {"label": "nothing", "causes": []},
+    {"label": "duty cap only", "causes": ["tighter duty cap"]},
+    {"label": "+ weather", "causes": ["tighter duty cap", "winter weather"]},
+    {"label": "+ no standby", "causes": ["tighter duty cap", "winter weather", "standby withdrawn"]},
+    {"label": "all four", "causes": ["tighter duty cap", "winter weather", "standby withdrawn", "no overnight repositioning"]}
+  ],
+
+  "standby_levels": [0, 5, 10, 15, 20],
+
+  "sweep": {
+    "parameters": [{"path": "regulation.max_duty_minutes", "low": 600, "high": 780, "step": 30}],
+    "targets": [{"metric": "cancel_pct", "value": 2.1, "tolerance": 1.0}],
+    "seeds": [11, 19],
+    "max_evaluations": 20,
+    "variants": {
+      "3 legs per duty": [{"path": "max_legs_per_duty", "value": 3, "both_rule_sets": true}],
+      "5 legs per duty": [{"path": "max_legs_per_duty", "value": 5, "both_rule_sets": true}],
+      "repositioning 2/night": [{"path": "policy.repositioning_per_night", "value": 2}],
+      "repositioning 10/night": [{"path": "policy.repositioning_per_night", "value": 10}]
+    },
+    "report_metrics": ["cancel_pct", "cascade_multiplier"]
+  }
+}
