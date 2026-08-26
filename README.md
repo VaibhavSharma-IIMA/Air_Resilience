@@ -9,8 +9,7 @@ with a standard trace format and a browser viewer that needs no installation.
 Built for airline operations. The engine is configuration-driven throughout:
 network, fleet, crew, schedule and duty-time rules are all declared in a file,
 so a carrier, a regulator or a network shape is a configuration rather than a
-code change. The December 2025 hub study is one such file among however many
-you write.
+code change.
 
 Requires Python 3.10 or later. Runs on Linux, macOS and Windows. No compilation
 step and no required dependencies.
