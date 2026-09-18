@@ -8,8 +8,8 @@ abstract: >-
   dependency-free browser viewer renders any trace. Validated against real
   operations data from the US DOT Bureau of Transportation Statistics.
 type: software
-version: "1.0.0"
-date-released: "2026-08-14"
+version: "1.0.1"
+date-released: "2026-09-18"
 license: MIT
 repository-code: "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
 url: "https://github.com/VaibhavSharma-IIMA/Air_Resilience"
@@ -33,21 +33,7 @@ authors:
     given-names: Sundaravalli
     affiliation: "Indian Institute of Management Ahmedabad"
     email: "sundaravallin@iima.ac.in"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
   - family-names: Sharma
     given-names: Vaibhav
     affiliation: "Indian Institute of Management Ahmedabad"
     email: "p25vaibhav@iima.ac.in"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
-# Fill in once the article has a DOI, then this becomes the preferred citation.
-# preferred-citation:
-#   type: article
-#   title: "AirResilience: a configurable simulator for disruption propagation in airline operations"
-#   journal: "SoftwareX"
-#   year: 2026
-#   doi: "10.1016/j.softx.XXXX.XXXXXX"
-#   authors:
-#     - family-names: Narayanaswami
-#       given-names: Sundaravalli
-#     - family-names: Sharma
-#       given-names: Vaibhav

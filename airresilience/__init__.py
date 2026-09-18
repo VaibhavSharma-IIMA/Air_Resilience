@@ -17,7 +17,7 @@ are recorded in a standard trace format (`trace`) that a generic browser viewer
 renders, and analysis lives in `calibration` and `metrics`.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from .model import (
     Airport, Aircraft, CrewUnit, Duty, ExperimentConfig, FlightLeg, Route,
