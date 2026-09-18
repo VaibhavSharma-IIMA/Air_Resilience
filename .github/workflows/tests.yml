@@ -42,7 +42,7 @@ jobs:
         run: python tests/test_units.py
 
       - name: Console entry point
-        run: airresilience configs/indigo_bom.yaml
+        run: airresilience configs/hub_network.yaml
 
       - name: YAML extra
         run: |
