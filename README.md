@@ -108,7 +108,7 @@ rather than directly caused.
     tests/              parity (931), units (40), viewer (22)
     reference/          fixed hub-case implementation, kept only as a test oracle
     docs/               validation method and results
-    examples/           traces, schedules, the BTS validation datasets
+    examples/           example traces, study specs, the BTS validation datasets
 
 ---
 
