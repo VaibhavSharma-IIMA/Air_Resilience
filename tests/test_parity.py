@@ -9,7 +9,7 @@ oracle. If the configurable engine reproduces it exactly across policies and
 seeds, the generalisation did not quietly change the model.
 
 This is the regression test that protects the framework's central claim: that
-the IndiGo study is one configuration of a general tool, not a special case with
+the demonstration study is one configuration of a general tool, not a special case with
 a wrapper around it.
 
 Run:
@@ -41,17 +41,17 @@ REF_REASON = {"fdtl": DUTY_LIMIT_REACHED,
               "": None}
 
 try:
-    from indigo_model import (                                       # noqa: E402
+    from hub_reference import (                                       # noqa: E402
         FITTED_CONGESTION, StructuralConfig, base_profile, build_template, run_season,
     )
 except ModuleNotFoundError:
     sys.exit(
         "The reference implementation was not found.\n\n"
-        f"Expected: {ROOT / 'reference' / 'indigo_model.py'}\n\n"
+        f"Expected: {ROOT / 'reference' / 'hub_reference.py'}\n\n"
         "It ships with this package as a test oracle. If you removed it, the\n"
         "framework still runs; only this parity test needs it.")
 
-CONFIG = ROOT / "configs" / "indigo_bom.yaml"
+CONFIG = ROOT / "configs" / "hub_network.yaml"
 GREEN, RED, DIM, RESET = "\033[32m", "\033[31m", "\033[2m", "\033[0m"
 
 failures: list[str] = []

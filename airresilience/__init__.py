@@ -6,7 +6,7 @@ operations.
 
     from airresilience import load_experiment, Simulator, emit
 
-    cfg = load_experiment("configs/indigo_bom.yaml")
+    cfg = load_experiment("configs/hub_network.yaml")
     result = Simulator(cfg, congestion_minutes=40).run()
     print(result.summary())
     emit(result).write("run.trace.json")

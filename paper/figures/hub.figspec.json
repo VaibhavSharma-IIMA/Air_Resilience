@@ -1,6 +1,6 @@
 {
   "_comment": "What the figures for the hub case of Section 3.1 are made from. Causes, baselines and published targets are properties of the study rather than of the software, so they are declared here instead of being written into make_figures.py. Copy this file and change the config, causes and targets to produce the same figures for another experiment.",
-  "config": "configs/indigo_bom.yaml",
+  "config": "configs/hub_network.yaml",
   "seeds": [
     101,
     121
@@ -131,7 +131,7 @@
     19.7
   ],
   "daily_metric": "otp_pct",
-  "daily_xlabel": "Day of the week beginning 2 December",
+  "daily_xlabel": "Day of the modelled week",
   "standby_levels": [
     0,
     3,
@@ -142,15 +142,15 @@
     20
   ],
   "day_labels": [
-    "2 Dec",
-    "3 Dec",
-    "4 Dec",
-    "5 Dec",
-    "6 Dec",
-    "7 Dec",
-    "8 Dec"
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7"
   ],
-  "viewer_day": "2 Dec",
+  "viewer_day": "D1",
   "viewer_scrub": 0.78,
   "topology_day": 2,
   "topology_scrub": 0.95,
@@ -200,7 +200,7 @@
         "metric": "cancel_pct",
         "value": 28.5,
         "tolerance": 2.0,
-        "note": "hub airport, week of 1-8 December"
+        "note": "hub airport, across the week"
       },
       {
         "metric": "otp_pct.0",

@@ -1,5 +1,5 @@
 {
- "config": "configs/indigo_bom.yaml",
+ "config": "configs/hub_network.yaml",
  "seeds": [
   101,
   102,

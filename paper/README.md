@@ -6,7 +6,7 @@ they are generated from.
 
     make_figures.py             regenerates every figure
     figures/*.png               the figures themselves
-    figures/indigo.figspec.json the study: causes, calibration targets, variants
+    figures/hub.figspec.json the study: causes, calibration targets, variants
     figures/attribution.json    the numbers behind the attribution figure
 
 ## Regenerating
@@ -27,7 +27,7 @@ charts need matplotlib alone.
 
 ## The study spec
 
-`figures/indigo.figspec.json` describes a study rather than the software: which
+`figures/hub.figspec.json` describes a study rather than the software: which
 causes to decompose, which observations to calibrate against, which structural
 assumptions to vary. `examples/analysis_demo.py` reads the same file, so the
 analysis in the article and the figures illustrating it run from one description.

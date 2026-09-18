@@ -48,10 +48,10 @@ on any configuration you write, wherever it lives.
 
 Both suites run in a few seconds on a current machine.
 
-    python run.py configs/indigo_bom.yaml                  # one week, day by day
-    python run.py configs/indigo_bom.yaml --sweep standby 0 4 8 12 20 --seeds 101-110
-    python run.py configs/indigo_bom.yaml --standby 12 --trace b.trace.json
-    python run.py configs/indigo_bom.yaml --trace a.trace.json
+    python run.py configs/hub_network.yaml                  # one week, day by day
+    python run.py configs/hub_network.yaml --sweep standby 0 4 8 12 20 --seeds 101-110
+    python run.py configs/hub_network.yaml --standby 12 --trace b.trace.json
+    python run.py configs/hub_network.yaml --trace a.trace.json
 
     python viewer/bundle.py a.trace.json b.trace.json -o demo.html
     open demo.html                         # or open viewer/viewer.html and drag files in
@@ -127,7 +127,7 @@ cancellations, propagated ones and the ratio between them:
 across seeds, so a difference smaller than the spread across schedules is not
 read as a result:
 
-    python run.py configs/indigo_bom.yaml --sweep standby 0 6 12 20 --seeds 101-110
+    python run.py configs/hub_network.yaml --sweep standby 0 6 12 20 --seeds 101-110
 
 **How much does each cause contribute when several act at once?** Causes
 interact, so they cannot be scored one at a time. `metrics.attribute` computes
@@ -221,9 +221,9 @@ start and whether a leg may complete.
 
 Any field left out is simply not enforced, so you can start with one limit.
 
-**No real regulation ships with this package.** DGCA, FAA and EASA rules run to
+**No real regulation ships with this package.** National rules run to
 hundreds of pages with carrier-specific approvals, and a partial implementation
-that looks authoritative is worse than none. `dgca_style_2025` is provided as a
+that looks authoritative is worse than none. `duty_rules_2025` is provided as a
 worked example, is flagged `is_reconstruction: true`, and says so in every trace
 it produces.
 
@@ -272,7 +272,7 @@ recomputed from the legs rather than trusted from the summary, so traces from
 different engines are always compared on the same definitions.
 
 Adapting a foreign simulator means writing one adapter and nothing else; see
-`adapters/indigo_adapter.py`.
+`adapters/external_model_adapter.py`.
 
 ---
 
@@ -355,7 +355,7 @@ observation, only assumed; disabling it isolates aircraft displacement, which
 BTS can adjudicate exactly. Re-enabling crew later is a configuration change,
 not new code.
 
-**This has been done.** Three real Southwest Airlines periods ship in
+**This has been done.** Three real operating periods of one large US carrier ship in
 `examples/bts_validation/`, reconstructed from December 2022 and January 2023 BTS
 data:
 
@@ -367,7 +367,7 @@ data:
 
 On ordinary disruption the mechanism validates: 61 modelled against 43 observed,
 with nothing fitted. On the meltdown it under-predicts by an order of magnitude,
-and that gap is the useful part. Southwest's collapse was a crew *assignment*
+and that gap is the useful part. that collapse was a crew *assignment*
 failure, not a crew *capacity* failure: the scheduling system could handle a few
 hundred reassignments and was asked for thousands. This framework models capacity,
 so the boundary is correctly located rather than concealed by a fit.
@@ -389,7 +389,7 @@ both just configurations. Two ship:
 
 | Config | Shape | Schedule |
 |---|---|---|
-| `indigo_bom.yaml` | airline hub, 40 aircraft | generated |
+| `hub_network.yaml` | airline hub, 40 aircraft | generated |
 | `example_p2p.yaml` | point-to-point mesh, 8 bases | CSV |
 
 They differ in where resources end the day, which is what drives propagation:
@@ -401,7 +401,7 @@ configuration does.
 ## Regenerating the figures
 
     python paper/make_figures.py all
-    python paper/make_figures.py attribution --spec paper/figures/indigo.figspec.json
+    python paper/make_figures.py attribution --spec paper/figures/hub.figspec.json
     python paper/make_figures.py calibration --config configs/example_p2p.yaml
 
 Every figure in the article is produced by `paper/make_figures.py` from a

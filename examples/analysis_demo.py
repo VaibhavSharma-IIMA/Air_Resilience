@@ -43,7 +43,7 @@ from airresilience.model import load_experiment
 from airresilience.calibration import CalibrationSpec, ParameterSpec, Target, fit
 from airresilience.metrics import attribute, replicate, structural_sweep
 
-DEFAULT_SPEC = ROOT / "paper" / "figures" / "indigo.figspec.json"
+DEFAULT_SPEC = ROOT / "paper" / "figures" / "hub.figspec.json"
 
 
 def _coerce(value):

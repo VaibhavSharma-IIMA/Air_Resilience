@@ -1,6 +1,6 @@
 # Validation against real operations data
 
-Three periods of US DOT BTS On-Time Performance data for Southwest Airlines were
+Three periods of US DOT BTS On-Time Performance data for a major US carrier were
 run through the framework. The result is a partial validation with an
 informative failure, and the failure is the more useful half.
 
@@ -47,10 +47,10 @@ happened.
 
 That gap is not a defect. It is a measurement of how much of the meltdown was
 *not* aircraft displacement, and the public record says exactly what the
-remainder was. The DOT investigation and Southwest's own executives attribute the
+remainder was. The regulator's investigation and the carrier's own executives attribute the
 collapse to the crew reassignment system, SkySolver, which was overwhelmed by the
 volume of reassignments and had to be abandoned for manual scheduling. Crews
-became unassignable, then timed out. Southwest was fined $140 million, the
+became unassignable, then timed out. The carrier was fined $140 million, the
 largest such penalty the DOT has issued.
 
 So the model, run with **crew constraints deliberately switched off**, reproduces
@@ -76,7 +76,7 @@ requires assuming roughly 1.3 crews per aircraft, which is far below any
 plausible establishment for a US major.
 
 **So the meltdown cannot be reproduced as a legal crew shortage**, and that is the
-most precise finding here. Southwest's crews were largely present and legal; what
+most precise finding here. The carrier's crews were largely present and legal; what
 failed was the ability to *assign* them. SkySolver could handle on the order of
 300 simultaneous reassignments and was asked for thousands, so schedulers reverted
 to working by hand. Crews then timed out while waiting to be told where to go.
@@ -88,7 +88,7 @@ capacity. The gap is a scope boundary, correctly located.
 
 The distinction matters for how the framework should be used.
 
-| | IndiGo, Dec 2025 | Southwest, Dec 2022 |
+| | Hub demonstration case | US carrier, Dec 2022 |
 |---|---|---|
 | Trigger | Regulatory change to duty limits | Winter storm |
 | Binding constraint | Crew capacity: not enough legal hours | Crew assignment: hours existed, could not be allocated |
@@ -119,7 +119,7 @@ Not supported:
 
 ## Why this matters for the framework's central claim
 
-The framework's demonstration case argues that IndiGo's December 2025 disruption
+The framework's demonstration case argues that the demonstration carrier's 2025 disruption
 was driven by crew planning rather than by the shock itself. This validation
 reaches the same conclusion about a different airline, on a different continent,
 from real data, by a different route: aircraft displacement is insufficient, and

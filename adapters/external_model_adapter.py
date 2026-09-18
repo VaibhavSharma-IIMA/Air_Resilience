@@ -3,7 +3,7 @@
 """
 Worked example: adapting an outside simulator to the AirResilience trace format.
 
-The simulator adapted here is `reference/indigo_model.py`, a self-contained
+The simulator adapted here is `reference/hub_reference.py`, a self-contained
 implementation of the hub case that knows nothing about this framework. That is
 the point: it stands in for any simulator someone else has already written.
 
@@ -12,8 +12,8 @@ format. Neither imports the other. Adapting a different simulator to the viewer
 and the analysis tools means writing one file like this and nothing else.
 
 Run:
-    python indigo_adapter.py            # writes the standard example traces
-    python indigo_adapter.py --help
+    python external_model_adapter.py            # writes the standard example traces
+    python external_model_adapter.py --help
 """
 
 from __future__ import annotations
@@ -30,8 +30,8 @@ sys.path.insert(0, str(ROOT / "reference"))
 from airresilience.trace import Airport, Leg, TraceBuilder, read, summarise  # noqa: E402
 
 try:
-    import indigo_model as M  # noqa: E402
-    from indigo_model import (  # noqa: E402
+    import hub_reference as M  # noqa: E402
+    from hub_reference import (  # noqa: E402
         CALIBRATED_CREWS_PER_AC, DEFAULT_FOG_DAYS, FITTED_CONGESTION, FITTED_FDTL_HOURS,
         StructuralConfig, base_profile, run_season,
     )
@@ -40,20 +40,20 @@ except ModuleNotFoundError:
         "This adapter wraps the standalone simulator in\n"
         f"{ROOT / 'reference'}. It is only an example of adapting a foreign\n"
         "simulator. To emit traces from the framework itself, use:\n\n"
-        "    python run.py configs/indigo_bom.yaml --trace out.trace.json")
+        "    python run.py configs/hub_network.yaml --trace out.trace.json")
 
 # Real coordinates, so the viewer draws an actual network rather than a diagram.
 # A synthetic study can omit these; the viewer falls back to a radial layout.
 AIRPORTS = {
-    "BOM": ("Mumbai",     19.0896, 72.8656),
-    "AMD": ("Ahmedabad",  23.0772, 72.6347),
-    "JAI": ("Jaipur",     26.8242, 75.8122),
-    "DEL": ("Delhi",      28.5562, 77.1000),
-    "CCU": ("Kolkata",    22.6547, 88.4467),
-    "HYD": ("Hyderabad",  17.2403, 78.4294),
-    "MAA": ("Chennai",    12.9941, 80.1709),
-    "BLR": ("Bengaluru",  13.1979, 77.7063),
-    "GOI": ("Goa",        15.3808, 73.8314),
+    "HUB": ("Hub", -0.801, -4.579),
+    "N01": ("Ahmedabad",  23.0772, 72.6347),
+    "N02": ("Jaipur",     26.8242, 75.8122),
+    "N03": ("Delhi",      28.5562, 77.1000),
+    "E01": ("Kolkata",    22.6547, 88.4467),
+    "C01": ("Hyderabad",  17.2403, 78.4294),
+    "S01": ("Chennai",    12.9941, 80.1709),
+    "S02": ("Bengaluru",  13.1979, 77.7063),
+    "W01": ("Goa",        15.3808, 73.8314),
 }
 
 DAY_LABELS = ["2 Dec", "3 Dec", "4 Dec", "5 Dec", "6 Dec", "7 Dec", "8 Dec"]
@@ -75,7 +75,7 @@ def build_trace(run_id: str, label: str, *, seed: int = 104, standby_pct: float 
                    record_all=True)
 
     tb = TraceBuilder(run_id=run_id, label=label,
-                      engine=f"indigo_model (case study) / airresilience-adapter",
+                      engine=f"hub_reference (case study) / airresilience-adapter",
                       seed=seed, notes=notes)
 
     tb.set_network(hub=M.HUB, airports=[
@@ -111,7 +111,7 @@ def build_trace(run_id: str, label: str, *, seed: int = 104, standby_pct: float 
     tb.add_parameter("turn_hub", prof.turn_hub, "assumed", "minutes")
     tb.add_parameter("overnight_ground", cfg.overnight_min, "assumed", "minutes")
     tb.add_parameter("weekly_departures_network", M.WEEKLY_DEPARTURES, "sourced", "flights",
-                     "DGCA notice")
+                     "regulator notice")
     tb.add_parameter("pilot_establishment_network", M.PILOTS, "sourced", "pilots", "Lok Sabha")
 
     leg_uid = 0
@@ -179,7 +179,7 @@ def main() -> None:
     print("-" * 76)
     for name in names:
         tb = build_trace(name, seed=a.seed, **SCENARIOS[name])
-        p = tb.write(out / f"indigo_{name}.trace.json")
+        p = tb.write(out / f"hub_{name}.trace.json")
         m = summarise(read(p))
         print(f"{name:<14}{m['legs']:>7}{m['cancelled']:>11}{m['cancel_pct']:>8.1f}%"
               f"{p.name:>34}")

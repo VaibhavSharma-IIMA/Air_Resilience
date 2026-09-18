@@ -177,7 +177,7 @@ class TraceBuilder:
     traces is a mechanical job rather than a redesign:
 
         tb = TraceBuilder(run_id="baseline", label="As flown")
-        tb.set_network(hub="BOM", airports=[...])
+        tb.set_network(hub="HUB", airports=[...])
         tb.add_parameter("standby_pct", 0, "user", "%")
         tb.add_day(0, "2 Dec", conditions=["fog"], metrics={...})
         tb.add_leg(Leg(...))

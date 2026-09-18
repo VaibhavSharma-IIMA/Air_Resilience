@@ -59,7 +59,7 @@ def build_page(tmp: pathlib.Path, config: str) -> tuple[pathlib.Path, dict]:
 
 
 def run_checks(pw, tmp: pathlib.Path) -> None:
-    page_path, trace = build_page(tmp, "configs/indigo_bom.yaml")
+    page_path, trace = build_page(tmp, "configs/hub_network.yaml")
     metrics = trace["metrics"]
 
     browser = pw.chromium.launch()
@@ -132,7 +132,7 @@ def run_checks(pw, tmp: pathlib.Path) -> None:
     # --- a second trace produces a comparison, not a mess -------------------
     trace_b = tmp / "b.trace.json"
     subprocess.run([sys.executable, str(ROOT / "run.py"),
-                    str(ROOT / "configs/indigo_bom.yaml"),
+                    str(ROOT / "configs/hub_network.yaml"),
                     "--standby", "12", "--trace", str(trace_b)],
                    check=True, stdout=subprocess.DEVNULL)
     page_two = tmp / "two.html"

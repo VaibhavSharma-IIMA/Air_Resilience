@@ -6,7 +6,7 @@ change, and the one constraint that is stricter than it looks.
 ## The parity suite constrains the engine
 
 `tests/test_parity.py` checks the configurable engine against the fixed
-reference implementation in `reference/indigo_model.py`, comparing 40,040
+reference implementation in `reference/hub_reference.py`, comparing 40,040
 individual legs across 20 scenarios on state, cause and realised departure time.
 Agreement is exact.
 

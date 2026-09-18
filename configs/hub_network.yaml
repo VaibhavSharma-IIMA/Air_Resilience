@@ -1,12 +1,12 @@
-# The IndiGo December 2025 case, expressed entirely as configuration.
+# The hub demonstration case, expressed entirely as configuration.
 #
 # Nothing in this file is special to the engine: it is one experiment among many
 # the framework can run. Every parameter carries a provenance label so a reader
 # can tell evidence from modelling choice.
 
-name: indigo-bom-december-2025
+name: hub-network-week
 description: >
-  Stylised Mumbai hub operation across the week of 2-8 December 2025, used as the
+  Stylised single-hub operation across one week, used as the
   framework's demonstration case. The timetable is synthetic and the duty rules
   are a reconstruction; see parameters below.
 
@@ -14,31 +14,31 @@ days: 7
 seed: 104
 
 network:
-  hub: BOM
+  hub: HUB
   airports:
-    - {code: BOM, name: Mumbai,     lat: 19.0896, lon: 72.8656}
-    - {code: AMD, name: Ahmedabad,  lat: 23.0772, lon: 72.6347}
-    - {code: JAI, name: Jaipur,     lat: 26.8242, lon: 75.8122}
-    - {code: DEL, name: Delhi,      lat: 28.5562, lon: 77.1000}
-    - {code: CCU, name: Kolkata,    lat: 22.6547, lon: 88.4467}
-    - {code: HYD, name: Hyderabad,  lat: 17.2403, lon: 78.4294}
-    - {code: MAA, name: Chennai,    lat: 12.9941, lon: 80.1709}
-    - {code: BLR, name: Bengaluru,  lat: 13.1979, lon: 77.7063}
-    - {code: GOI, name: Goa,        lat: 15.3808, lon: 73.8314}
+    - {code: HUB, name: Hub,     lat:  -0.801, lon:  -4.579}
+    - {code: N01, name: North 1,  lat:   3.187, lon:  -4.809}
+    - {code: N02, name: North 2,     lat:   6.934, lon:  -1.632}
+    - {code: N03, name: North 3,      lat:   8.666, lon:  -0.344}
+    - {code: E01, name: East 1,    lat:   2.764, lon:  11.003}
+    - {code: C01, name: Central 1,  lat:  -2.650, lon:   0.985}
+    - {code: S01, name: South 1,    lat:  -6.896, lon:   2.727}
+    - {code: S02, name: South 2,  lat:  -6.693, lon:   0.262}
+    - {code: W01, name: West 1,        lat:  -4.510, lon:  -3.613}
   routes:
-    - {origin: BOM, destination: AMD, block_minutes: 70,  weight: 3}
-    - {origin: BOM, destination: JAI, block_minutes: 100, weight: 1}
-    - {origin: BOM, destination: DEL, block_minutes: 125, weight: 2}
-    - {origin: BOM, destination: CCU, block_minutes: 160, weight: 1}
-    - {origin: BOM, destination: HYD, block_minutes: 85,  weight: 3}
-    - {origin: BOM, destination: MAA, block_minutes: 105, weight: 2}
-    - {origin: BOM, destination: BLR, block_minutes: 100, weight: 3}
-    - {origin: BOM, destination: GOI, block_minutes: 60,  weight: 2}
+    - {origin: HUB, destination: N01, block_minutes: 70,  weight: 3}
+    - {origin: HUB, destination: N02, block_minutes: 100, weight: 1}
+    - {origin: HUB, destination: N03, block_minutes: 125, weight: 2}
+    - {origin: HUB, destination: E01, block_minutes: 160, weight: 1}
+    - {origin: HUB, destination: C01, block_minutes: 85,  weight: 3}
+    - {origin: HUB, destination: S01, block_minutes: 105, weight: 2}
+    - {origin: HUB, destination: S02, block_minutes: 100, weight: 3}
+    - {origin: HUB, destination: W01, block_minutes: 60,  weight: 2}
 
 fleet:
   count: 40
   type: narrowbody
-  base: BOM
+  base: HUB
   turn_minutes:   {hub: 40, outstation: 35}
   slack_minutes:  {hub: 16, outstation: 12}
   overnight_ground_minutes: 300
@@ -47,7 +47,7 @@ fleet:
 crew:
   units_per_aircraft: 2.925
   unit_size: 2
-  base: BOM
+  base: HUB
   callout_minutes: 75
 
 schedule:
@@ -60,11 +60,11 @@ schedule:
   stagger_jitter: 20
 
 # Rules the roster was planned under, before the revision.
-baseline_regulation: dgca_style_2025_pre
+baseline_regulation: duty_rules_2025_pre
 
 # Rules actually in force during the week.
 regulation:
-  name: dgca-style-2025-post-calibrated
+  name: duty-rules-2025-post-calibrated
   description: Post-revision limits with the fitted 1.7 h reduction applied
   authority: reconstruction, not transcribed from the circular
   is_reconstruction: true
@@ -93,7 +93,7 @@ conditions:
   2: [fog]
 
 # Calendar labels for the modelled week, used by the viewer and the day table.
-day_labels: ["2 Dec", "3 Dec", "4 Dec", "5 Dec", "6 Dec", "7 Dec", "8 Dec"]
+day_labels: ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
 
 parameters:
   - {name: fdtl_cut, value: 1.7, unit: hours, provenance: calibrated,
@@ -103,6 +103,6 @@ parameters:
   - {name: crews_per_aircraft, value: 2.925, unit: crews/aircraft, provenance: derived,
      note: Set so the pre-change week runs clean; only the 7.6:9.1 ratio is sourced}
   - {name: weekly_departures_network, value: 15014, unit: flights, provenance: sourced,
-     note: DGCA notice}
+     note: Regulator notice}
   - {name: pilot_establishment_network, value: 5200, unit: pilots, provenance: sourced,
-     note: Lok Sabha}
+     note: Parliamentary answer}

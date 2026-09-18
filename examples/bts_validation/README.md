@@ -1,6 +1,6 @@
 # BTS validation datasets
 
-Three real Southwest Airlines periods, reconstructed from US DOT BTS On-Time
+Three real operating periods of one large US carrier, reconstructed from US DOT BTS On-Time
 Performance data and shipped so the validation can be re-run without the 60 MB
 source download.
 
@@ -8,7 +8,7 @@ source download.
 |---|---|---|
 | `dec_calm`   | 1-7 Dec 2022   | Normal operations, 0.23% cancelled |
 | `jan_mixed`  | 12-18 Jan 2023 | Ordinary winter weather, 1.39% |
-| `dec_storm`  | 22-28 Dec 2022 | The Southwest meltdown, 47.9% |
+| `dec_storm`  | 22-28 Dec 2022 | Major operational collapse, 47.9% |
 
 Each contains:
 

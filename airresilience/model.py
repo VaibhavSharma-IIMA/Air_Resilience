@@ -4,7 +4,7 @@
 Core entities and experiment configuration.
 
 Everything the engine needs is described here as data. Nothing in this module
-knows about IndiGo, Mumbai, or any particular study: an experiment is a network,
+knows about any carrier, hub, or any particular study: an experiment is a network,
 a fleet, a crew pool, a rule set, a schedule and a policy, all loadable from a
 file.
 
@@ -284,7 +284,7 @@ def load_experiment(path: str | pathlib.Path) -> ExperimentConfig:
     if not p.exists():
         raise FileNotFoundError(
             f"no configuration at {p}. Configurations live in the repository's "
-            f"configs/ directory, for example configs/indigo_bom.yaml.")
+            f"configs/ directory, for example configs/hub_network.yaml.")
     d = _read_structured(p)
     if not isinstance(d, dict):
         raise ValueError(f"{p.name} does not contain a configuration mapping")

@@ -3,11 +3,11 @@
 """
 AirResilience command line.
 
-    python run.py configs/indigo_bom.yaml                     # run and report
-    python run.py configs/indigo_bom.yaml --trace out.json    # also write a trace
-    python run.py configs/indigo_bom.yaml --standby 12 --roster compliant
-    python run.py configs/indigo_bom.yaml --sweep standby 0 2 4 6 8 10 12 15 20
-    python run.py configs/indigo_bom.yaml --seeds 101-120     # replicate and average
+    python run.py configs/hub_network.yaml                     # run and report
+    python run.py configs/hub_network.yaml --trace out.json    # also write a trace
+    python run.py configs/hub_network.yaml --standby 12 --roster compliant
+    python run.py configs/hub_network.yaml --sweep standby 0 2 4 6 8 10 12 15 20
+    python run.py configs/hub_network.yaml --seeds 101-120     # replicate and average
 """
 from __future__ import annotations
 import argparse, copy, pathlib, statistics, sys

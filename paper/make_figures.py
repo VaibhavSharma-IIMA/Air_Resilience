@@ -8,7 +8,7 @@ Every figure that carries data is produced here, from a configuration file and a
 figure specification. Nothing is drawn by hand and no numbers are typed in.
 
     python paper/make_figures.py all
-    python paper/make_figures.py attribution --spec paper/figures/indigo.figspec.json
+    python paper/make_figures.py attribution --spec paper/figures/hub.figspec.json
     python paper/make_figures.py calibration --config configs/example_p2p.yaml
     python paper/make_figures.py calibration --config configs/example_p2p.yaml
 
@@ -449,7 +449,7 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("figure", choices=["all", "architecture", "viewer", "topologies",
                                        "calibration", "attribution", "validation"])
-    ap.add_argument("--spec", default=str(FIGDIR / "indigo.figspec.json"))
+    ap.add_argument("--spec", default=str(FIGDIR / "hub.figspec.json"))
     ap.add_argument("--config", help="override the configuration named in the figspec")
     ap.add_argument("--out", help="output PNG path")
     args = ap.parse_args()

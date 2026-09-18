@@ -15,8 +15,8 @@ questions and does not care how they are answered:
     can this crew legally complete this leg?    -> can_complete()
 
 Shipping a partial implementation of a real regulation is worse than shipping
-none, so this module deliberately does not include DGCA, FAA or EASA rule sets.
-It provides the vocabulary and one worked example (`dgca_style_2025`) that is
+none, so this module deliberately does not include national authority rule sets.
+It provides the vocabulary and one worked example (`duty_rules_2025`) that is
 explicitly labelled as a reconstruction, not an authority.
 
 Example
@@ -187,10 +187,10 @@ class RuleSet:
 # Worked example
 # ---------------------------------------------------------------------------
 
-def dgca_style_2025(*, phase: str = "pre") -> RuleSet:
-    """A reconstruction in the style of the 2025 Indian FDTL revision.
+def duty_rules_2025(*, phase: str = "pre") -> RuleSet:
+    """A reconstruction in the style of the 2025 duty-limit revision.
 
-    NOT a transcription of the DGCA circular. It reproduces the structure of the
+    NOT a transcription of any published circular. It reproduces the structure of the
     change — a reduced duty cap, a harder night penalty and a second mandatory
     day off — at the level of detail the case study needed. It is provided as a
     template for writing your own rule set, and is flagged
@@ -200,8 +200,8 @@ def dgca_style_2025(*, phase: str = "pre") -> RuleSet:
         raise ValueError("phase must be 'pre' or 'post'")
     post = phase == "post"
     return RuleSet(
-        name=f"dgca-style-2025-{phase}",
-        description="Reconstruction of the pre/post 2025 Indian FDTL revision",
+        name=f"duty-rules-2025-{phase}",
+        description="Reconstruction of the pre/post 2025 2025 duty-limit revision",
         authority="reconstruction, not transcribed from the circular",
         is_reconstruction=True,
         max_duty_minutes=780,
@@ -216,8 +216,8 @@ def dgca_style_2025(*, phase: str = "pre") -> RuleSet:
     )
 
 
-BUILTIN = {"dgca_style_2025_pre": lambda: dgca_style_2025(phase="pre"),
-           "dgca_style_2025_post": lambda: dgca_style_2025(phase="post")}
+BUILTIN = {"duty_rules_2025_pre": lambda: duty_rules_2025(phase="pre"),
+           "duty_rules_2025_post": lambda: duty_rules_2025(phase="post")}
 
 
 def load_ruleset(spec: "str | dict | RuleSet") -> RuleSet:

@@ -48,7 +48,7 @@ DAY_MINUTES = 1440
 #
 # Deliberately named for the *mechanism* rather than for any regulation: a crew
 # running out of legal hours is the same event whether the limit comes from the
-# DGCA, the FAA or a collective agreement. Analysis code should compare against
+# a national authority or a collective agreement. Analysis code should compare against
 # these constants rather than string literals.
 RESOURCE_OUT_OF_POSITION = "resource_out_of_position"
 DUTY_LIMIT_REACHED = "duty_limit_reached"

@@ -1,11 +1,11 @@
 # Reference implementation
 
-`indigo_model.py` is a fixed, self-contained implementation of the hub case
+`hub_reference.py` is a fixed, self-contained implementation of the hub case
 described in Section 3.1 of the accompanying article. It exists **only as a test
 oracle** and is not part of the framework.
 
 `tests/test_parity.py` asserts that `airresilience.engine`, driven by
-`configs/indigo_bom.yaml`, reproduces it exactly: 20 scenarios spanning four
+`configs/hub_network.yaml`, reproduces it exactly: 20 scenarios spanning four
 seeds, three standby levels, both roster modes and two rule sets, compared over
 40,040 individual legs on state, cause and realised departure time.
 

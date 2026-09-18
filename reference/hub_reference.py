@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Sundaravalli Narayanaswami and Vaibhav Sharma
 """
-IndiGo December 2025 disruption: multi-day operations model.
+hub demonstration case: multi-day operations model.
 
 A discrete-event simulation of one week at a single hub. Aircraft fly rotations,
 crews carry rolling duty and rest limits across days, and aircraft begin each
@@ -9,10 +9,10 @@ morning wherever the previous evening left them.
 
 WHAT THIS MODEL IS NOT
 ----------------------
-It is not a measurement of IndiGo. The timetable is synthetic, generated from a
-seeded random draw, because IndiGo's sector-level schedule is not public. The
+It is not a measurement of the demonstration carrier. The timetable is synthetic, generated from a
+seeded random draw, because the demonstration carrier's sector-level schedule is not public. The
 duty and rest rules are a reconstruction of how flight time limitations generally
-bind, not a reading of the DGCA circular. Turnarounds, overnight behaviour and the
+bind, not a reading of any published circular. Turnarounds, overnight behaviour and the
 congestion feedback are modelling choices. Two parameters are fitted to four
 published observations; every other number is an output of those choices.
 
@@ -77,11 +77,11 @@ def js_round(x: float) -> int:
 
 # code, bearing from north, block minutes, schedule weight   [INVENTED]
 SPOKES = [
-    ("AMD", 340, 70, 3), ("JAI", 358, 100, 1), ("DEL", 22, 125, 2), ("CCU", 72, 160, 1),
-    ("HYD", 112, 85, 3), ("MAA", 142, 105, 2), ("BLR", 168, 100, 3), ("GOI", 196, 60, 2),
+    ("N01", 340, 70, 3), ("N02", 358, 100, 1), ("N03", 22, 125, 2), ("E01", 72, 160, 1),
+    ("C01", 112, 85, 3), ("S01", 142, 105, 2), ("S02", 168, 100, 3), ("W01", 196, 60, 2),
 ]
 
-HUB = "BOM"
+HUB = "HUB"
 N_TAILS = 40            # [INVENTED] size of the modelled sub-fleet
 DUTY_PRE = 60           # [RECONSTRUCT] report time before first departure
 DUTY_POST = 30          # [RECONSTRUCT] debrief after last arrival
@@ -121,15 +121,15 @@ class Profile:
     max_legs: int = 4
 
 
-# Only the 7.6 : 9.1 ratio is [SOURCED] (Lok Sabha). The absolute crew level is
+# Only the 7.6 : 9.1 ratio is [SOURCED] (parliamentary answer). The absolute crew level is
 # [INVENTED], set so the pre-change week runs clean, which it did.
 PROFILES = {
-    "indigo": Profile("IndiGo (lean)", BASE_CREWS),
+    "lean": Profile("Demonstration carrier (lean)", BASE_CREWS),
     "ratio":  Profile("Peer crew ratio", BASE_CREWS * 9.1 / 7.6),
-    "peer":   Profile("Peer (Air India)", BASE_CREWS * 9.1 / 7.6, (3, 3), 50, 55, 22, 26),
+    "peer":   Profile("Peer carrier", BASE_CREWS * 9.1 / 7.6, (3, 3), 50, 55, 22, 26),
 }
 
-# Calibrated base case. Fitted jointly to the Mumbai cancellation rate (28.5%)
+# Calibrated base case. Fitted jointly to the hub cancellation rate (28.5%)
 # and published on-time performance on 1, 2 and 3 December (49.5 / 35.0 / 19.7).
 FITTED_FDTL_HOURS = 1.7      # [FITTED]
 FITTED_CONGESTION = 40       # [FITTED]
@@ -437,7 +437,7 @@ BASE_SEEDS = tuple(range(101, 121))   # 20 schedules, as used throughout the rep
 
 
 def base_profile(crews_per_ac: float = CALIBRATED_CREWS_PER_AC) -> Profile:
-    p = PROFILES["indigo"]
+    p = PROFILES["lean"]
     return Profile(p.name, crews_per_ac, p.pairs, p.turn_spoke, p.turn_hub,
                    p.slack_spoke, p.slack_hub, p.max_legs)
 
@@ -517,8 +517,8 @@ def compliance_threshold(prof: Profile, *, fdtl_hours=FITTED_FDTL_HOURS,
     """How many crews a compliant roster needs, and the bracket that implies.
 
     The tighter cap forces more duty lines for identical flying. Sustaining them
-    at five days on and one off sets a threshold. IndiGo failed to comply, so it
-    sat below; carriers at the 9.1 ratio complied, so 1.20x IndiGo cleared it.
+    at five days on and one off sets a threshold. the demonstration carrier failed to comply, so it
+    sat below; carriers at the 9.1 ratio complied, so 1.20x the demonstration carrier cleared it.
 
     NOTE: the two bounding facts are sourced, but the threshold they anchor to is
     a product of our own duty-construction rules. Section 9 of the report shows it
@@ -532,24 +532,24 @@ def compliance_threshold(prof: Profile, *, fdtl_hours=FITTED_FDTL_HOURS,
     return {"duty_lines_old_cap": old, "duty_lines_new_cap": new,
             "inflation_pct": 100 * (new / old - 1),
             "threshold_crews": threshold,
-            "indigo_range": (math.ceil(threshold / 1.197), threshold - 1),
+            "lean_range": (math.ceil(threshold / 1.197), threshold - 1),
             "peer_crews": js_round(prof.crews_per_ac * 9.1 / 7.6 * N_TAILS)}
 
 
 # --- economics --------------------------------------------------------------
 
-WEEKLY_DEPARTURES = 15014        # [SOURCED] DGCA notice
+WEEKLY_DEPARTURES = 15014        # [SOURCED] regulator notice
 NET_DAILY_CNL = 450              # [SOURCED] reported network cancellations per day
 NET_DAILY_DEP = 2145             # [SOURCED] 15,014 / 7
-MUMBAI_CNL_PCT = 28.5            # [SOURCED] MIAL, 905 of 3,171
-PILOTS = 5200                    # [SOURCED] Lok Sabha
+HUB_CNL_PCT = 28.5            # [SOURCED] hub airport report
+PILOTS = 5200                    # [SOURCED] parliamentary answer
 COST_PER_CANCELLED_LAKH = 13.5   # [SOURCED-derived] 577.2 cr / 4,290 flights
 COST_PER_PILOT_LAKH = 50.0       # [INVENTED] assumption, range 40-60
 
-# Mumbai cancelled at a higher rate than the network did. Applying the hub rate to
+# The hub cancelled at a higher rate than the network did. Applying the hub rate to
 # the whole network overstates cost by about a quarter, which an earlier version of
 # this analysis did.
-HUB_TO_NET_FACTOR = (NET_DAILY_CNL / NET_DAILY_DEP) / (MUMBAI_CNL_PCT / 100)
+HUB_TO_NET_FACTOR = (NET_DAILY_CNL / NET_DAILY_DEP) / (HUB_CNL_PCT / 100)
 
 
 def hub_to_network_scale(week_legs: int) -> float:

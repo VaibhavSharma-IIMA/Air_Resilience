@@ -33,7 +33,7 @@ from airresilience import (                                              # noqa:
 from airresilience.engine import load_schedule_csv                       # noqa: E402
 from airresilience.regulations import NightRule, RollingLimit, load_ruleset  # noqa: E402
 
-CONFIG = ROOT / "configs" / "indigo_bom.yaml"
+CONFIG = ROOT / "configs" / "hub_network.yaml"
 
 
 def raises(exc, fn, *a, **kw) -> bool:
@@ -84,7 +84,7 @@ def test_unset_rules_are_not_enforced():
 
 
 def test_ruleset_roundtrip():
-    r = load_ruleset("dgca_style_2025_post")
+    r = load_ruleset("duty_rules_2025_post")
     back = RuleSet.from_dict(r.to_dict())
     assert back.max_duty_minutes == r.max_duty_minutes
     assert back.night.duty_penalty_minutes == r.night.duty_penalty_minutes
@@ -93,7 +93,7 @@ def test_ruleset_roundtrip():
 
 
 def test_builtin_rulesets_declare_reconstruction():
-    for name in ("dgca_style_2025_pre", "dgca_style_2025_post"):
+    for name in ("duty_rules_2025_pre", "duty_rules_2025_post"):
         assert load_ruleset(name).is_reconstruction, \
             "a rule set not transcribed from source must say so"
     assert raises(KeyError, load_ruleset, "faa_117")
@@ -105,7 +105,7 @@ def test_builtin_rulesets_declare_reconstruction():
 
 def test_config_loads():
     c = base_cfg()
-    assert c.network.hub == "BOM" and c.fleet.count == 40 and c.days == 7
+    assert c.network.hub == "HUB" and c.fleet.count == 40 and c.days == 7
     assert c.baseline_regulation is not None
 
 
@@ -119,7 +119,7 @@ def test_config_rejects_invalid():
     c = base_cfg(); c.crew.units = None; c.crew.units_per_aircraft = None
     assert raises(ValueError, c.validate), "crew size must be specified somehow"
     from airresilience import Route
-    c = base_cfg(); c.network.routes[0] = Route("BOM", "DEL", 0)
+    c = base_cfg(); c.network.routes[0] = Route("HUB", "N03", 0)
     assert raises(ValueError, c.validate), "a route must take positive time"
 
 
@@ -138,9 +138,9 @@ def test_csv_ingest():
     with tempfile.TemporaryDirectory() as d:
         p = pathlib.Path(d) / "s.csv"
         p.write_text("aircraft,origin,destination,scheduled_departure,block_minutes\n"
-                     "AC00,BOM,DEL,06:30,125\n"
-                     "AC00,DEL,BOM,540,125\n"
-                     "AC01,BOM,GOI,07:15,60\n")
+                     "AC00,HUB,N03,06:30,125\n"
+                     "AC00,N03,HUB,540,125\n"
+                     "AC01,HUB,W01,07:15,60\n")
         legs = load_schedule_csv(str(p))
     assert len(legs) == 3
     assert legs[0].scheduled_departure == 390, "HH:MM must parse to minutes"
@@ -283,8 +283,8 @@ def test_dated_csv_runs_the_right_number_of_legs():
         rows = ["aircraft,origin,destination,scheduled_departure,block_minutes,day,sequence"]
         for day in range(3):
             for i in range(2):
-                rows.append(f"AC0{i},BOM,DEL,{7+day}:00,125,{day},0")
-                rows.append(f"AC0{i},DEL,BOM,{11+day}:00,125,{day},1")
+                rows.append(f"AC0{i},HUB,N03,{7+day}:00,125,{day},0")
+                rows.append(f"AC0{i},N03,HUB,{11+day}:00,125,{day},1")
         p.write_text("\n".join(rows) + "\n")
         legs = load_schedule_csv(str(p))
     assert len(legs) == 12
@@ -347,7 +347,7 @@ def test_emitted_trace_validates():
     t = good_trace()
     trace.validate(t)
     assert t["format"] == "airresilience.trace"
-    assert t["network"]["hub"] == "BOM"
+    assert t["network"]["hub"] == "HUB"
     assert len(t["days"]) == 7 and t["legs"]
 
 
