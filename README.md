@@ -18,8 +18,8 @@ step and no required dependencies.
 [`CITATION.cff`](CITATION.cff) directly. The archived release is:
 
 > Narayanaswami, S. and Sharma, V. (2026). *AirResilience: configurable
-> simulation of disruption propagation in scheduled operations*, version 1.0.0.
-> Zenodo. https://doi.org/10.5281/zenodo.22105690
+> simulation of disruption propagation in scheduled operations*, version 1.0.1.
+> Zenodo. https://doi.org/10.5281/zenodo.22833751
 
 If you use the software in published work, please cite the accompanying
 SoftwareX article as well as this release.

@@ -19,7 +19,7 @@ contact:
     given-names: Sundaravalli
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.22105690"
+    value: "10.5281/zenodo.22833751"
     description: "Archived release used for the SoftwareX article"
 keywords:
   - discrete-event simulation
